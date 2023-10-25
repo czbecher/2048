@@ -7,6 +7,13 @@ from logic import *
 import copy
 
 def ai_move(board, searches_per_move, search_length):
+    """
+    1. Branches (level 1) for each possible first move (right, left, up, down)
+    2. For each first move, it branches (level 2) searches_per_move times.
+    3. In each branch, it tries search_length moves, counting the score
+    4. Adds the new level 2 score to the total level 1 score
+    5. Returns the first move that had the hightest total score
+    """
     first_moves = [move_right, move_left, move_up, move_down]
     scores = [0,0,0,0]
 
