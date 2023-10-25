@@ -2,9 +2,9 @@
 2048 game
 
 # Summaries
-logic.py contains the main functions for the game (i.e. move_up, move_right, addnum, etc.  I wrote this code myself.
-2048_terminal.py allows you to play the game in the terminal
-2048_searchahead.py automatically plays the game using the Monte Carlo method from [this Kite video](https://www.youtube.com/watch?v=FE_oAQ5FzMk).  For each possible next move, it tries x next moves x times, and adds the scores.  Then it chooses the move that has the best score.
+- logic.py contains the main functions for the game (i.e. move_up, move_right, addnum, etc.  I wrote this code myself.
+- 2048_terminal.py allows you to play the game manually in the terminal
+- 2048_searchahead.py automatically plays the game using the Monte Carlo method from [this Kite video](https://www.youtube.com/watch?v=FE_oAQ5FzMk).  For each possible next move, it tries x next moves x times, and adds the scores.  Then it chooses the move that has the best score.
 
 # Notes on logic.py
 - 90% chance of a 2 spawning, 10% chance of a 4
