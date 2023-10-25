@@ -2,8 +2,8 @@
 2048 game
 
 # Summaries
-- logic.py contains the main functions for the game (i.e. move_up, move_right, addnum, etc.)  I wrote this code myself.
-- 2048_terminal.py allows you to play the game manually in the terminal
+- logic.py contains the main functions for the game (i.e. move_up, move_right, addnum, etc.).  I wrote this code myself.
+- 2048_terminal.py allows you to play the game manually in the terminal.    I wrote this code myself.
 - 2048_searchahead.py automatically plays the game using the Monte Carlo method from [this Kite video](https://www.youtube.com/watch?v=FE_oAQ5FzMk).  
 
 # Notes on logic.py
