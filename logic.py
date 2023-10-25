@@ -1,3 +1,5 @@
+# written entirely by Christopher Becher, Oct 2023
+
 import random
 import copy
 
@@ -26,9 +28,9 @@ def print_matrix(gamearr):
     print(gamearr_str)
 
 def add_num(gamearr):
-    # 1. make a list of all available coordinates
+    # 1. make a list of all available coordinates (ones that have a zero)
     # 2. choose a random value in the list
-    # 3. add a 2 or a 3 there
+    # 3. add a 2 or a 4 there
     valid_cells = []
     for row_index in range(4):
         for col_index in range(4):
@@ -223,79 +225,5 @@ def move_up(gamearr):
     is_valid = gamearr != game_copy
     return gamearr, is_valid, score_increase
 
-def random_move(gamearr):  #returns the function itself
+def random_move(gamearr):       # randomly chooses a function and calls it
     return random.sample([move_up, move_down, move_left, move_right], 1)[0](gamearr)
-
-def get_score(gamearr):
-    total_sum = sum(value for row in gamearr for value in row)
-
-    sum = 0
-    for row in gamearr:
-        for val in row:
-            sum += val
-    return sum
-
-def move(inp, gamearr):
-    game_copy = copy.deepcopy(gamearr)
-    score_add = 0
-    valid_move = 0
-
-    if inp == '0' or inp == '/opt/homebrew/bin/python3 /Users/riipen/Desktop/Python/2048/2048.py':
-        exit()
-    elif inp == 'lost':
-        gamearr[0] = [2,4,2,4]
-        gamearr[1] = [4,2,4,2]
-        gamearr[2] = [64,128,2,4]
-        gamearr[3] = [0,0,64,2]
-    elif inp == 'ahead':
-        gamearr[0] = [512,64,128,128]
-        gamearr[1] = [64,2,4,64]
-        gamearr[2] = [32,128,128,4]
-        gamearr[3] = [0,0,64,32]
-    elif inp == 'winner':
-        gamearr[0][1] = 1024
-        gamearr[0][2] = 512
-        gamearr[0][3] = 512
-    elif inp == '9':
-        gamearr[0] = [0,0,0,0]
-        gamearr[1] = [0,0,0,0]
-        gamearr[2] = [0,0,0,0]
-        gamearr[3] = [0,0,0,0]
-        add_num(gamearr)
-        add_num(gamearr)
-        return 0
-    elif inp == 'd':
-        gamearr, valid_move, score_add = move_right(gamearr)
-    elif inp == 'a':
-        gamearr, valid_move, score_add = move_left(gamearr)
-    elif inp == 's':
-        gamearr, valid_move, score_add = move_down(gamearr)
-    elif inp == 'w':
-        gamearr, valid_move, score_add = move_up(gamearr)
-    else:
-        # print("Invalid key!")
-        return 0
-    
-    return valid_move
-    # if gamearr != game_copy:
-    #     return 1
-    # else:
-    #     # print("that did nothing")
-    #     return 0
-
-
-# is_valid = 0
-# score = 32
-# gamearr = [
-#         [2,0,2,0],
-#         [0,8,4,0],
-#         [0,0,2,0],
-#         [0,0,0,0]
-#     ]
-
-# print_matrix(gamearr)
-# move('a', gamearr)
-# # score += scoreadd
-# print_matrix(gamearr)
-# print(is_valid, score)
-
