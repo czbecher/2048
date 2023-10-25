@@ -1,0 +1,82 @@
+import pyperclip
+from logic import *
+import numpy as np
+import copy
+import time
+
+start_str = "Starting 2048 board:"
+iter = 0
+winloss = 0
+
+def ai_move(board, searches_per_move, search_length):
+    first_moves = [move_right, move_left, move_up, move_down]
+    scores = [0,0,0,0]
+
+    for first_index in range(4):                                    # try all four possible first moves
+        first_board = copy.deepcopy(board)
+        first_move = first_moves[first_index]
+        first_board, first_valid, first_score = first_move(first_board)
+
+        if first_valid:
+            add_num(first_board)
+            scores[first_index] += first_score
+        else:
+            continue
+
+        for later_moves in range(searches_per_move):                # try x sets of random moves after the first move
+            move_number = 1
+            search_board = copy.deepcopy(first_board)
+            is_valid = True
+
+            while is_valid and move_number < search_length:         # try x random moves for this set and return the new score
+                search_board, is_valid, score = random_move(search_board)
+                if is_valid:
+                    add_num(search_board)
+                    scores[first_index] += score
+                    move_number += 1
+
+        # print(f"\nOption {first_index} could lead to:")
+        # print_matrix(search_board)
+
+    best_move_index = np.argmax(scores)
+    # print(f"\nChoosing option {best_move_index}: of {scores}")
+    best_move = first_moves[best_move_index]
+    return best_move(board)
+
+
+print(start_str)
+max = 0
+position_valid = 0
+score = 0
+gamearr = start()
+print_matrix(gamearr)
+
+while True:
+    max += 1000
+    while iter < max:
+        gamearr, position_valid, scoreadd = ai_move(gamearr, 20, 20)
+        if scoreadd == 0:
+            if check_winloss(gamearr) == 1:
+                print_matrix(gamearr)
+                print("AI Lost ☹")
+                print(f"Turn {iter}, score: {score}")
+                exit()
+        
+        add_num(gamearr)
+        score += scoreadd
+        iter += 1
+        # print_matrix(gamearr)
+        # print(f"Turn {iter}, score: {score}")
+        # time.sleep(0.003)
+        if iter % 100 == 0:
+            print_matrix(gamearr)
+            print(f"Turn {iter}, score: {score}")
+
+
+    if check_winloss(gamearr) == 2:
+        print("AI Won !")
+
+    print_matrix(gamearr)
+    print(f"Turn {iter}, score: {score}")
+    if input("Continue? N to stop ").lower() == "n":
+        break
